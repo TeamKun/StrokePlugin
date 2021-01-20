@@ -13,6 +13,8 @@ public class StrokeEvent implements Listener {
     public String stroke;
     public float playerPitch, playerYaw, basePitch, baseYaw;
     public ItemStack items;
+    public final int sensi = 10;
+    //I think sensi should be set 10. if it is 15, KUN's mouse configuration. if it is 5, nobody can control.
 
     boolean count = false;
 
@@ -33,23 +35,23 @@ public class StrokeEvent implements Listener {
                 count = true;
             }
 
-            if(Math.abs(playerPitch-basePitch)>15){
+            if(Math.abs(playerPitch-basePitch)>sensi){
                 if(Math.signum(playerPitch-basePitch)==1){
                     wayCode.append("D");
-                    player.sendMessage("D");
+                    player.sendTitle("D","",10,70,20);
                 }else{
                     wayCode.append("U");
-                    player.sendMessage("U");
+                    player.sendTitle("U","",10,70,20);
                 }
                 basePitch = playerPitch;
             }
-            if(Math.abs(playerYaw-baseYaw)>15){
+            if(Math.abs(playerYaw-baseYaw)>sensi){
                 if(Math.signum(playerYaw-baseYaw)==1){
                     wayCode.append("R");
-                    player.sendMessage("R");
+                    player.sendTitle("R","",10,70,20);
                 }else{
                     wayCode.append("L");
-                    player.sendMessage("L");
+                    player.sendTitle("L","",10,70,20);
                 }
                 baseYaw = playerYaw;
             }
