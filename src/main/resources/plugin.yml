@@ -1,0 +1,5 @@
+name: StrokePlugin
+version: @version@
+main: net.kunmc.lab.stroke.strokeplugin.StrokePlugin
+api-version: 1.15
+authors: [CrewL2020]
