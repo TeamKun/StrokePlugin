@@ -61,6 +61,8 @@ public class StrokeEvent implements Listener {
                 StrokeAction(player,stroke);
                 wayCode.delete(0,10);
             }
+        }else{
+            wayCode.delete(0,10);
         }
     }
 
@@ -75,4 +77,5 @@ public class StrokeEvent implements Listener {
                 break;
         }
     }
+
 }
