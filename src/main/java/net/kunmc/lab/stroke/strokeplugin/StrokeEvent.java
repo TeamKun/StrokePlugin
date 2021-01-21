@@ -13,8 +13,8 @@ public class StrokeEvent implements Listener {
     public String stroke;
     public float playerPitch, playerYaw, basePitch, baseYaw;
     public ItemStack items;
-    public final int sensi = 10;
-    //I think sensi should be set 10. if it is 15, KUN's mouse configuration. if it is 5, nobody can control.
+    public final int sensi = 12;
+    //I think sensi should be set 12. if it is 15, become KUN's mouse configuration. if it is 5, nobody can control.
 
     boolean count = false;
 
@@ -38,27 +38,28 @@ public class StrokeEvent implements Listener {
             if(Math.abs(playerPitch-basePitch)>sensi){
                 if(Math.signum(playerPitch-basePitch)==1){
                     wayCode.append("D");
-                    player.sendTitle("D","",10,70,20);
+                    player.sendTitle("","↓",10,70,20);
                 }else{
                     wayCode.append("U");
-                    player.sendTitle("U","",10,70,20);
+                    player.sendTitle("","↑",10,70,20);
                 }
                 basePitch = playerPitch;
+                baseYaw = playerYaw;//この行をコメントアウトすると超ハイセンシになるが非推奨
             }
             if(Math.abs(playerYaw-baseYaw)>sensi){
                 if(Math.signum(playerYaw-baseYaw)==1){
                     wayCode.append("R");
-                    player.sendTitle("R","",10,70,20);
+                    player.sendTitle("","→",10,70,20);
                 }else{
                     wayCode.append("L");
-                    player.sendTitle("L","",10,70,20);
+                    player.sendTitle("","←",10,70,20);
                 }
+                basePitch = playerPitch;//この行をコメントアウトすると超ハイセンシになるが非推奨
                 baseYaw = playerYaw;
             }
 
             if(wayCode.length()>=5){
                 String s = new String(wayCode);
-                player.sendMessage(s);
                 stroke = s.substring(0,5);
                 StrokeAction(player,stroke);
                 wayCode.delete(0,10);
@@ -75,7 +76,7 @@ public class StrokeEvent implements Listener {
                 weather.weatherclear(player);
                 break;
             default:
-                player.sendMessage("nah");
+                player.sendTitle("","ミス",10,70,20);
                 break;
         }
     }

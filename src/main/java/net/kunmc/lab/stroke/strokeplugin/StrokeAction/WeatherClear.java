@@ -6,6 +6,7 @@ public class WeatherClear{
 
     public void weatherclear(Player player){
         player.getWorld().setStorm(false);
+        player.sendTitle("","WeatherClear happen!",10,70,20);
     }
 
 }
