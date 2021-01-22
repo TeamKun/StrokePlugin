@@ -8,8 +8,7 @@ public final class StrokePlugin extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         getServer().getPluginManager().registerEvents(new StrokeEvent(), this);
-        getCommand("item").setExecutor(new MotionCommandExecutor(this));
-        getCommand("OK").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke").setExecutor(new MotionCommandExecutor(this));
         getLogger().info("モーションプラグインが有効になりました");
     }
 
