@@ -21,6 +21,10 @@ public class StrokeEvent implements Listener {
     boolean count = false;
     boolean chant = false;
 
+    int fadeIn = 5;
+    int stay = 10;
+    int fadeOut = 5;
+
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
 
@@ -31,11 +35,13 @@ public class StrokeEvent implements Listener {
 
         if(item.equalsIgnoreCase("END_ROD")){
             if(wayCode.length()>9){
-                player.setFireTicks(200);
+                player.setFireTicks(100);
                 wayCode.delete(0,20);
                 click = false;
                 chant = false;
-                player.sendTitle("","魔力が暴走した。",10,70,20);
+                player.sendTitle("","魔力が暴走した。",fadeIn,stay,fadeOut);
+                player.getWorld().createExplosion(player.getLocation(),0);
+                player.damage(4);
             }else if(click||chant){
                 playerPitch = player.getLocation().getPitch();
                 playerYaw = player.getLocation().getYaw();
@@ -48,10 +54,10 @@ public class StrokeEvent implements Listener {
                 if(Math.abs(playerPitch-basePitch)>sensi){
                     if(Math.signum(playerPitch-basePitch)==1){
                         wayCode.append("D");
-                        player.sendTitle("","↓",10,70,20);
+                        player.sendTitle("","↓",fadeIn,stay,fadeOut);
                     }else{
                         wayCode.append("U");
-                        player.sendTitle("","↑",10,70,20);
+                        player.sendTitle("","↑",fadeIn,stay,fadeOut);
                     }
                     basePitch = playerPitch;
                     baseYaw = playerYaw;//この行をコメントアウトすると超ハイセンシになるが非推奨
@@ -59,10 +65,10 @@ public class StrokeEvent implements Listener {
                 if(Math.abs(playerYaw-baseYaw)>sensi){
                     if(Math.signum(playerYaw-baseYaw)==1){
                         wayCode.append("R");
-                        player.sendTitle("","→",10,70,20);
+                        player.sendTitle("","→",fadeIn,stay,fadeOut);
                     }else{
                         wayCode.append("L");
-                        player.sendTitle("","←",10,70,20);
+                        player.sendTitle("","←",fadeIn,stay,fadeOut);
                     }
                     basePitch = playerPitch;//この行をコメントアウトすると超ハイセンシになるが非推奨
                     baseYaw = playerYaw;
@@ -103,8 +109,11 @@ public class StrokeEvent implements Listener {
                 WeatherClear weather = new WeatherClear();
                 weather.weatherclear(player);
                 break;
+            case "UD":
+
+                break;
             default:
-                player.sendTitle("","ミス",10,70,20);
+                player.sendTitle("","ミス",fadeIn,stay,fadeOut);
                 break;
         }
     }
