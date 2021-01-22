@@ -4,6 +4,7 @@ import net.kunmc.lab.stroke.strokeplugin.StrokeAction.WeatherClear;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,7 +17,9 @@ public class StrokeEvent implements Listener {
     public final int sensi = 12;
     //I think sensi should be set 12. if it is 15, become KUN's mouse configuration. if it is 5, nobody can control.
 
+    boolean click = false;
     boolean count = false;
+    boolean chant = false;
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
@@ -27,45 +30,70 @@ public class StrokeEvent implements Listener {
         String item = items.getType().toString();
 
         if(item.equalsIgnoreCase("END_ROD")){
-            playerPitch = player.getLocation().getPitch();
-            playerYaw = player.getLocation().getYaw();
-            if(!count){
-                basePitch = playerPitch;
-                baseYaw = playerYaw;
-                count = true;
-            }
-
-            if(Math.abs(playerPitch-basePitch)>sensi){
-                if(Math.signum(playerPitch-basePitch)==1){
-                    wayCode.append("D");
-                    player.sendTitle("","↓",10,70,20);
-                }else{
-                    wayCode.append("U");
-                    player.sendTitle("","↑",10,70,20);
+            if(wayCode.length()>9){
+                player.setFireTicks(200);
+                wayCode.delete(0,20);
+                click = false;
+                chant = false;
+                player.sendTitle("","魔力が暴走した。",10,70,20);
+            }else if(click||chant){
+                playerPitch = player.getLocation().getPitch();
+                playerYaw = player.getLocation().getYaw();
+                if(!count){
+                    basePitch = playerPitch;
+                    baseYaw = playerYaw;
+                    count = true;
                 }
-                basePitch = playerPitch;
-                baseYaw = playerYaw;//この行をコメントアウトすると超ハイセンシになるが非推奨
-            }
-            if(Math.abs(playerYaw-baseYaw)>sensi){
-                if(Math.signum(playerYaw-baseYaw)==1){
-                    wayCode.append("R");
-                    player.sendTitle("","→",10,70,20);
-                }else{
-                    wayCode.append("L");
-                    player.sendTitle("","←",10,70,20);
-                }
-                basePitch = playerPitch;//この行をコメントアウトすると超ハイセンシになるが非推奨
-                baseYaw = playerYaw;
-            }
 
-            if(wayCode.length()>=5){
-                String s = new String(wayCode);
-                stroke = s.substring(0,5);
-                StrokeAction(player,stroke);
-                wayCode.delete(0,10);
+                if(Math.abs(playerPitch-basePitch)>sensi){
+                    if(Math.signum(playerPitch-basePitch)==1){
+                        wayCode.append("D");
+                        player.sendTitle("","↓",10,70,20);
+                    }else{
+                        wayCode.append("U");
+                        player.sendTitle("","↑",10,70,20);
+                    }
+                    basePitch = playerPitch;
+                    baseYaw = playerYaw;//この行をコメントアウトすると超ハイセンシになるが非推奨
+                }
+                if(Math.abs(playerYaw-baseYaw)>sensi){
+                    if(Math.signum(playerYaw-baseYaw)==1){
+                        wayCode.append("R");
+                        player.sendTitle("","→",10,70,20);
+                    }else{
+                        wayCode.append("L");
+                        player.sendTitle("","←",10,70,20);
+                    }
+                    basePitch = playerPitch;//この行をコメントアウトすると超ハイセンシになるが非推奨
+                    baseYaw = playerYaw;
+                }
+
+                chant = true;//詠唱中を保持
             }
         }else{
-            wayCode.delete(0,10);
+            wayCode.delete(0,20);
+            click = false;
+            chant = false;
+            count = false;
+        }
+        click = false;//クリック判定の解除
+    }
+
+    @EventHandler
+    public void onPlayerClick(PlayerInteractEvent event){
+        items = player.getInventory().getItemInMainHand();
+        String item = items.getType().toString();
+
+        if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")){
+            click = true;
+            if(chant&&item.equalsIgnoreCase("END_ROD")){
+                stroke = new String(wayCode);
+                int len = stroke.length();
+                StrokeAction(player,stroke);
+                wayCode.delete(0,len);
+                click = false;
+                chant = false;
+            }
         }
     }
 
