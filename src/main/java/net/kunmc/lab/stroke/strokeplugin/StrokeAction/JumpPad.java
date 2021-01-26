@@ -11,11 +11,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerChangedMainHandEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class JumpPad implements Listener{
+    private Player player;
+    private boolean count = false;
 
     public void DropPad(Player player){
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
@@ -24,10 +28,32 @@ public class JumpPad implements Listener{
     }
 
     @EventHandler
+    public void onPlayerClick(PlayerInteractEvent event){
+        player = event.getPlayer();
+        String item = player.getInventory().getItemInMainHand().getType().toString();
+
+        if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")){
+            if(item.equalsIgnoreCase("END_ROD")){
+                count = true;
+            }
+        }
+    }
+
+    @EventHandler
+    public void changeMainHand(PlayerChangedMainHandEvent event){
+        player = event.getPlayer();
+        String item = player.getInventory().getItemInMainHand().getType().toString();
+
+        if(!(item.equalsIgnoreCase("END_ROD"))){
+            count = false;
+        }
+    }
+
+    @EventHandler
     public void BallBreak(ProjectileHitEvent event){
         Block block;
 
-        if(event.getEntity().getType().toString().equalsIgnoreCase("SNOWBALL")){
+        if(event.getEntity().getType().toString().equalsIgnoreCase("SNOWBALL")&&count){
             block = event.getEntity().getLocation().getBlock();
             block.setType(Material.PRISMARINE_SLAB);
 
@@ -40,6 +66,7 @@ public class JumpPad implements Listener{
             };
             task.runTaskTimer(StrokePlugin.getPlugin(), 100L,0L);
         }
+        count = false;
     }
 
     @EventHandler
