@@ -1,6 +1,8 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.WeatherClear;
+import net.kunmc.lab.stroke.strokeplugin.StrokeAction.JumpPad;
+import net.kunmc.lab.stroke.strokeplugin.StrokeAction.Attack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -105,12 +107,17 @@ public class StrokeEvent implements Listener {
 
     public void StrokeAction(Player player,String stroke){
         switch(stroke){
-            case "LURRD":
+            case "":
+                Attack fire = new Attack();
+                fire.Fire(player);
+                break;
+            case "LUR":
                 WeatherClear weather = new WeatherClear();
                 weather.weatherclear(player);
                 break;
-            case "UD":
-
+            case "DU":
+                JumpPad jumppad = new JumpPad();
+                jumppad.DropPad(player);
                 break;
             default:
                 player.sendTitle("","ミス",fadeIn,stay,fadeOut);
