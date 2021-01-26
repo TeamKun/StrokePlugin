@@ -110,8 +110,11 @@ public class StrokeEvent implements Listener {
     public void StrokeAction(Player player,String stroke){
         switch(stroke){
             case "":
+                /*
                 Attack fire = new Attack();
                 fire.Fire(player);
+                非常に不安定
+                */
                 break;
             case "LUR":
                 WeatherClear weather = new WeatherClear();
