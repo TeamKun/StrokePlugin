@@ -92,7 +92,9 @@ public class StrokeEvent implements Listener {
         items = player.getInventory().getItemInMainHand();
         String item = items.getType().toString();
 
-        if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")){
+        if(event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_AIR")
+           || event.getAction().toString().equalsIgnoreCase("LEFT_CLICK_BLOCK")
+        ){
             click = true;
             if(chant&&item.equalsIgnoreCase("END_ROD")){
                 stroke = new String(wayCode);
