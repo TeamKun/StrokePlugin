@@ -1,8 +1,10 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
+import net.kunmc.lab.stroke.strokeplugin.StrokeAction.SkyWalker;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.WeatherClear;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.JumpPad;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction.Attack;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,9 +25,9 @@ public class StrokeEvent implements Listener {
     boolean count = false;
     boolean chant = false;
 
-    int fadeIn = 5;
+    int fadeIn = 0;
     int stay = 10;
-    int fadeOut = 5;
+    int fadeOut = 0;
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
@@ -55,22 +57,22 @@ public class StrokeEvent implements Listener {
 
                 if(Math.abs(playerPitch-basePitch)>sensi){
                     if(Math.signum(playerPitch-basePitch)==1){
-                        wayCode.append("D");
-                        player.sendTitle("","↓",fadeIn,stay,fadeOut);
+                        wayCode.append("↓");
+                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
                     }else{
-                        wayCode.append("U");
-                        player.sendTitle("","↑",fadeIn,stay,fadeOut);
+                        wayCode.append("↑");
+                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
                     }
                     basePitch = playerPitch;
                     baseYaw = playerYaw;//この行をコメントアウトすると超ハイセンシになるが非推奨
                 }
                 if(Math.abs(playerYaw-baseYaw)>sensi){
                     if(Math.signum(playerYaw-baseYaw)==1){
-                        wayCode.append("R");
-                        player.sendTitle("","→",fadeIn,stay,fadeOut);
+                        wayCode.append("→");
+                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
                     }else{
-                        wayCode.append("L");
-                        player.sendTitle("","←",fadeIn,stay,fadeOut);
+                        wayCode.append("←");
+                        player.sendTitle("",new String(wayCode),fadeIn,stay,fadeOut);
                     }
                     basePitch = playerPitch;//この行をコメントアウトすると超ハイセンシになるが非推奨
                     baseYaw = playerYaw;
@@ -107,27 +109,24 @@ public class StrokeEvent implements Listener {
         }
     }
 
+    //↑↓→←
     public void StrokeAction(Player player,String stroke){
         switch(stroke){
-            case "":
-                /*
-                Attack fire = new Attack();
-                fire.Fire(player);
-                非常に不安定
-                */
+            case "→←→←":
+                SkyWalker skywalker = new SkyWalker();
+                skywalker.skywall(player,stroke);
                 break;
-            case "LUR":
+            case "←↑→":
                 WeatherClear weather = new WeatherClear();
-                weather.weatherclear(player);
+                weather.weatherclear(player,stroke);
                 break;
-            case "DU":
+            case "↓↑":
                 JumpPad jumppad = new JumpPad();
-                jumppad.DropPad(player);
+                jumppad.DropPad(player,stroke);
                 break;
             default:
-                player.sendTitle("","ミス",fadeIn,stay,fadeOut);
+                player.sendTitle("",ChatColor.DARK_RED +stroke,fadeIn,stay,fadeOut);
                 break;
         }
     }
-
 }

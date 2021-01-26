@@ -2,6 +2,7 @@ package net.kunmc.lab.stroke.strokeplugin.StrokeAction;
 
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,10 +22,10 @@ public class JumpPad implements Listener{
     private Player player;
     private boolean count = false;
 
-    public void DropPad(Player player){
+    public void DropPad(Player player,String stroke){
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
-        player.sendTitle("","JumpPad dropped!",5,10,5);
+        player.sendTitle("JumpPad dropped!", ChatColor.AQUA +stroke,0,10,0);
     }
 
     @EventHandler

@@ -24,7 +24,7 @@ public class MotionCommandExecutor implements CommandExecutor{
                 return false;
             }
             for(Player p : Bukkit.getOnlinePlayers()){
-                p.sendTitle("Stroke Plugin","制作 CrewL2020",5,50,5);
+                p.sendTitle("Stroke Plugin","制作 CrewL2020",0,10,0);
             }
         }
 
