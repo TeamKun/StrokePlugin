@@ -24,8 +24,8 @@ public class StrokeEvent implements Listener {
     boolean count = false;
     boolean chant = false;
 
-    int actionTitle[] = {0,10,0};
-    int cautionTitle[] = {5,30,5};
+    int actionTitle[] = {0,100,0};
+    int cautionTitle[] = {5,15,5};
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
@@ -41,7 +41,7 @@ public class StrokeEvent implements Listener {
                 wayCode.delete(0,20);
                 click = false;
                 chant = false;
-                player.sendTitle("",ChatColor.DARK_RED +"魔力が暴走した。",cautionTitle[0],actionTitle[1],cautionTitle[2]);
+                player.sendTitle("",ChatColor.DARK_RED +"魔力が暴走した。",cautionTitle[0],cautionTitle[1],cautionTitle[2]);
                 player.getWorld().createExplosion(player.getLocation(),0);
                 player.damage(4);
             }else if(click||chant){
@@ -123,7 +123,7 @@ public class StrokeEvent implements Listener {
                 jumppad.DropPad(player,stroke);
                 break;
             default:
-                player.sendTitle("",ChatColor.DARK_RED +stroke,actionTitle[0],actionTitle[1],actionTitle[2]);
+                player.sendTitle("",ChatColor.DARK_RED +stroke,actionTitle[0],cautionTitle[1],actionTitle[2]);
                 break;
         }
     }
