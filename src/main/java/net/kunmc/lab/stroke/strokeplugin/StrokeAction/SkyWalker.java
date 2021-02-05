@@ -12,19 +12,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class SkyWalker implements Listener{
     private Player player;
     private int r = 2;//半径
-
+    int cautionTitle[] = {5,30,5};
     public void skywall(Player player,String stroke){
-        player.sendTitle("You can walk on the sky!!", ChatColor.AQUA +stroke,0,10,0);
+        player.sendTitle("SkyWalk", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
 
 
         BukkitRunnable task = new BukkitRunnable() {
             int count = 0;
             public void run() {
-                Location startLoc = player.getLocation().subtract(r, r, r);
+                Location startLoc = player.getLocation().subtract(r, 1, r);
 
                 for (int i = startLoc.getBlockX(); i < startLoc.getBlockX() + r * 2; i++) {
                     for (int k = startLoc.getBlockZ(); k < startLoc.getBlockZ() + r * 2; k++) {
-                        Location loc = new Location(startLoc.getWorld(), i, startLoc.getBlockY() + 1, k);
+                        Location loc = new Location(startLoc.getWorld(), i, startLoc.getBlockY() , k);
                         Block b = loc.getBlock();
 
                         if (b.getType() == Material.AIR) {
