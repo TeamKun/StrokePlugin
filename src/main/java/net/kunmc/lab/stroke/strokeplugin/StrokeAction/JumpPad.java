@@ -21,7 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class JumpPad implements Listener{
     private Player player;
     private boolean count = false;
-    int cautionTitle[] = {5,15,5};
+    private final int[] cautionTitle = {5,15,5};
 
     public void DropPad(Player player,String stroke){
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
@@ -40,16 +40,6 @@ public class JumpPad implements Listener{
             if(item.equalsIgnoreCase("BLAZE_ROD")){
                 count = true;
             }
-        }
-    }
-
-    @EventHandler
-    public void changeMainHand(PlayerChangedMainHandEvent event){
-        player = event.getPlayer();
-        String item = player.getInventory().getItemInMainHand().getType().toString();
-
-        if(!(item.equalsIgnoreCase("BLAZE_ROD"))){
-            count = false;
         }
     }
 
