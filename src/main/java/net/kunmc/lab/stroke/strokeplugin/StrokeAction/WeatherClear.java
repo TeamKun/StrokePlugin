@@ -7,7 +7,7 @@ public class WeatherClear{
 
     public void weatherclear(Player player, String stroke){
         player.getWorld().setStorm(false);
-        player.sendTitle("WeatherClear happen!",ChatColor.AQUA +stroke,0,10,0);
+        player.sendTitle("あ～した天気になれ!",ChatColor.AQUA +stroke,0,20,0);
     }
 
 }

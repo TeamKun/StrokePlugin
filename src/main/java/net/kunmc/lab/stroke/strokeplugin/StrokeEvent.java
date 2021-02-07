@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class StrokeEvent implements Listener {
@@ -27,16 +29,13 @@ public class StrokeEvent implements Listener {
     boolean action = false;
 
     private final int[] actionTitle = {0,100,0};
-    private final int[] cautionTitle = {5,15,5};
+    private final int[] cautionTitle = {5,20,5};
 
     @EventHandler
-    public void changeMainHand(PlayerChangedMainHandEvent event){
+    public void changeMainHand(PlayerItemHeldEvent event){
         player = event.getPlayer();
-        items = player.getInventory().getItemInMainHand();
-        String item = items.getType().toString();
-        player.sendMessage(item);
 
-        if(wayCode.length()>0&&!(item.equalsIgnoreCase("BLAZE_ROD"))){
+        if(wayCode.length()>0){
             stroke = new String(wayCode);
             int len = stroke.length();
             player.sendTitle("",ChatColor.DARK_RED +stroke,actionTitle[0],cautionTitle[1],actionTitle[2]);
