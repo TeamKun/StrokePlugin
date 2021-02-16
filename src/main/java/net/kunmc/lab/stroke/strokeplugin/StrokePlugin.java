@@ -20,11 +20,12 @@ public final class StrokePlugin extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
         getLogger().info("モーションプラグインが無効になりました");
     }
 
     public static StrokePlugin getPlugin(){
         return plugin;
     }
+
+
 }

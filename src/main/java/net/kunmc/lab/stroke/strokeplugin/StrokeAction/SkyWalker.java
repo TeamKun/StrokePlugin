@@ -10,12 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class SkyWalker implements Listener{
-    private Player player;
-    private int r = 2;//半径
-    int cautionTitle[] = {5,20,5};
+    private final int r = 2;//半径
+    int[] cautionTitle = {5,20,5};
     public void skywall(Player player,String stroke){
-        player.sendTitle("空中散歩術！", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
 
+        player.sendTitle("空中散歩術！", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
 
         BukkitRunnable task = new BukkitRunnable() {
             int count = 0;

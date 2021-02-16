@@ -1,12 +1,12 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
 import org.bukkit.entity.Player;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerStats {
     Map<Player, String> StrokeMap = new HashMap<>();
+    //Map<Player, Integer> strokeCounterMap = new HashMap();
     Map<Player, Float> nowYawMap = new HashMap<>();
     Map<Player, Float> nowPitchMap = new HashMap<>();
     Map<Player, Float> agoYawMap = new HashMap<>();
@@ -14,7 +14,6 @@ public class PlayerStats {
 
     Map<Player, Boolean> clickMap = new HashMap<>();
     Map<Player, Boolean> countMap = new HashMap<>();
-    Map<Player, Boolean> chantMap = new HashMap<>();
     Map<Player, Boolean> actionMap = new HashMap<>();
 
     public void setStroke(Player player,String addWay){
@@ -77,4 +76,51 @@ public class PlayerStats {
     public float getSubtractPitch(Player player){
         return this.getNowPitch(player)-this.getAgoPitch(player);
     }
+
+    public void setClick(Player player,boolean bool){
+        clickMap.put(player,bool);
+    }
+
+    public void setCount(Player player,boolean bool){
+        countMap.put(player,bool);
+    }
+
+    public void setAction(Player player,boolean bool){
+        actionMap.put(player,bool);
+    }
+
+    public boolean getClick(Player player){
+        clickMap.putIfAbsent(player, false);
+        return clickMap.get(player);
+    }
+
+    public boolean getCount(Player player){
+        countMap.putIfAbsent(player, false);
+        return countMap.get(player);
+    }
+
+    public boolean getAction(Player player){
+        actionMap.putIfAbsent(player, false);
+        return actionMap.get(player);
+    }
+
+    //Tickを記録する際に使用
+    /*
+    public void setTick(Player player){
+        if(strokeCounterMap.get(player)==null){
+            strokeCounterMap.put(player,0);
+        }
+        strokeCounterMap.put(player,1+strokeCounterMap.get(player));
+    }
+
+    public int getTick(Player player){
+        if(strokeCounterMap.get(player)==null){
+            strokeCounterMap.put(player,0);
+        }
+        return strokeCounterMap.get(player);
+    }
+
+    public void resetTick(Player player){
+        strokeCounterMap.put(player,0);
+    }*/
 }

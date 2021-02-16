@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class MotionCommandExecutor implements CommandExecutor{
 
     private final StrokePlugin plugin;
-    int cautionTitle[] = {5,30,5};
+    int[] cautionTitle = {5,30,5};
 
     public MotionCommandExecutor(StrokePlugin plugin) {
         this.plugin = plugin;
