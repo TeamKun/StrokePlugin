@@ -11,8 +11,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.player.PlayerChangedMainHandEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.util.Vector;
@@ -27,6 +27,13 @@ public class JumpPad implements Listener{
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
         player.sendTitle("ジャンプパッド展開!", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+    }
+
+    @EventHandler
+    public void onEntitySpawn(EntitySpawnEvent event){
+        if(event.getEntity().getType().toString().equalsIgnoreCase("BLAZE_ROD")){
+            event.getEntity().remove();
+        }
     }
 
     @EventHandler
@@ -54,7 +61,7 @@ public class JumpPad implements Listener{
             BukkitRunnable task = new BukkitRunnable() {
                 public void run() {
                     block.setType(Material.AIR);
-                    cancel();
+                    this.cancel();
                     return;
                 }
             };

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class PlayerStats {
     Map<Player, String> StrokeMap = new HashMap<>();
-    //Map<Player, Integer> strokeCounterMap = new HashMap();
+    Map<Player, Integer> strokeCounterMap = new HashMap<>();
     Map<Player, Float> nowYawMap = new HashMap<>();
     Map<Player, Float> nowPitchMap = new HashMap<>();
     Map<Player, Float> agoYawMap = new HashMap<>();
@@ -15,6 +15,8 @@ public class PlayerStats {
     Map<Player, Boolean> clickMap = new HashMap<>();
     Map<Player, Boolean> countMap = new HashMap<>();
     Map<Player, Boolean> actionMap = new HashMap<>();
+    Map<Player, Boolean> timerMap = new HashMap<>();
+    Map<Player, Integer> taskIdMap = new HashMap<>();
 
     public void setStroke(Player player,String addWay){
         StringBuilder wayCode = new StringBuilder();
@@ -22,8 +24,7 @@ public class PlayerStats {
             wayCode.append(StrokeMap.get(player));
         }
         wayCode.append(addWay);
-        String stroke = new String(wayCode);
-        StrokeMap.put(player,stroke);
+        StrokeMap.put(player,new String(wayCode));
     }
 
     public void delStroke(Player player){
@@ -104,23 +105,33 @@ public class PlayerStats {
         return actionMap.get(player);
     }
 
-    //Tickを記録する際に使用
-    /*
+    public Boolean getSignal(Player player){
+        timerMap.putIfAbsent(player, false);
+        return timerMap.get(player);
+    }
+
+    public void setSignal(Player player,Boolean bool){
+        timerMap.put(player,bool);
+    }
+
     public void setTick(Player player){
-        if(strokeCounterMap.get(player)==null){
-            strokeCounterMap.put(player,0);
-        }
+        strokeCounterMap.putIfAbsent(player, 0);
         strokeCounterMap.put(player,1+strokeCounterMap.get(player));
     }
-
     public int getTick(Player player){
-        if(strokeCounterMap.get(player)==null){
-            strokeCounterMap.put(player,0);
-        }
+        strokeCounterMap.putIfAbsent(player, 0);
         return strokeCounterMap.get(player);
     }
-
     public void resetTick(Player player){
         strokeCounterMap.put(player,0);
-    }*/
+    }
+
+    public void setTaskId(Player player, int id){
+        taskIdMap.put(player,id);
+    }
+
+    public int getTaskId(Player player){
+        taskIdMap.putIfAbsent(player, 0);
+        return taskIdMap.get(player);
+    }
 }
