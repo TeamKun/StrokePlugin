@@ -17,6 +17,8 @@ public class PlayerStats {
     Map<Player, Boolean> actionMap = new HashMap<>();
     Map<Player, Boolean> timerMap = new HashMap<>();
     Map<Player, Integer> taskIdMap = new HashMap<>();
+    Map<Player, Boolean> triggerMap = new HashMap<>();
+    Map<Player, Boolean> waitMap = new HashMap<>();
 
     public void setStroke(Player player,String addWay){
         StringBuilder wayCode = new StringBuilder();
@@ -90,6 +92,10 @@ public class PlayerStats {
         actionMap.put(player,bool);
     }
 
+    public void setTrigger(Player player,Boolean bool){
+        triggerMap.put(player,bool);
+    }
+
     public boolean getClick(Player player){
         clickMap.putIfAbsent(player, false);
         return clickMap.get(player);
@@ -103,6 +109,11 @@ public class PlayerStats {
     public boolean getAction(Player player){
         actionMap.putIfAbsent(player, false);
         return actionMap.get(player);
+    }
+
+    public Boolean getTrigger(Player player){
+        triggerMap.putIfAbsent(player, false);
+        return triggerMap.get(player);
     }
 
     public Boolean getSignal(Player player){
@@ -133,5 +144,14 @@ public class PlayerStats {
     public int getTaskId(Player player){
         taskIdMap.putIfAbsent(player, 0);
         return taskIdMap.get(player);
+    }
+
+    public boolean getWaitAction(Player player){
+        waitMap.putIfAbsent(player, false);
+        return waitMap.get(player);
+    }
+
+    public void setWaitAction(Player player,boolean bool){
+        waitMap.put(player,bool);
     }
 }

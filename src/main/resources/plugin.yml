@@ -1,5 +1,11 @@
 name: StrokePlugin
-version: @version@
+version: 1.0-SNAPSHOT
 main: net.kunmc.lab.stroke.strokeplugin.StrokePlugin
 api-version: 1.15
 authors: [CrewL2020]
+
+commands:
+  Stroke:
+    description: strokeplugin commands
+  ReloadConfig:
+    description: strokeplugin commands

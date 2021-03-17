@@ -1,0 +1,17 @@
+actions:
+  SkyWalker:
+    display: "SkyWalker"
+    stroke: "→←→←"
+    announce: "空中散歩術！"
+  WeatherClear:
+    display: "WeatherClear"
+    stroke: "←↑→"
+    announce: "あ～した天気になれ!"
+  JumpPad:
+    display: "JumpPad"
+    stroke: "↓↑"
+    announce: "ジャンプパッド展開!"
+
+rod_item: "BLAZE_ROD"
+
+magic_went_off: "魔力が暴走した。"

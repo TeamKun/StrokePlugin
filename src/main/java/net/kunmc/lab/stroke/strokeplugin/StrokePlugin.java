@@ -15,6 +15,8 @@ public final class StrokePlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new JumpPad(), this);
         getServer().getPluginManager().registerEvents(new SkyWalker(), this);
         getCommand("Stroke").setExecutor(new MotionCommandExecutor(this));
+        getCommand("ReloadConfig").setExecutor(new MotionCommandExecutor(this));
+        Config.loadConfig(false);
         getLogger().info("モーションプラグインが有効になりました");
     }
 

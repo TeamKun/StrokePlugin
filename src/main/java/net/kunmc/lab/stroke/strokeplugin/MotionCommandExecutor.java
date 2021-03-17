@@ -28,6 +28,12 @@ public class MotionCommandExecutor implements CommandExecutor{
                 p.sendTitle("Stroke Plugin","制作 CrewL2020",cautionTitle[0],cautionTitle[1],cautionTitle[2]);
             }
         }
+        else if(cmd.getName().equalsIgnoreCase("ReloadConfig"))
+        {
+            Config.loadConfig(true);
+            sender.sendMessage("Config.yml was reloaded");
+            return true;
+        }
 
         return false;
 

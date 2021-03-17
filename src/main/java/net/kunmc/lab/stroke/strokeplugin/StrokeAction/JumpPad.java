@@ -1,5 +1,6 @@
 package net.kunmc.lab.stroke.strokeplugin.StrokeAction;
 
+import net.kunmc.lab.stroke.strokeplugin.Config;
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,12 +27,12 @@ public class JumpPad implements Listener{
     public void DropPad(Player player,String stroke){
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
-        player.sendTitle("ジャンプパッド展開!", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+        player.sendTitle(Config.getJumpPadAnnounce(), ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
     }
 
     @EventHandler
     public void onEntitySpawn(EntitySpawnEvent event){
-        if(event.getEntity().getType().toString().equalsIgnoreCase("BLAZE_ROD")){
+        if(event.getEntity().getType().toString().equalsIgnoreCase(Config.getRod())){
             event.getEntity().remove();
         }
     }
@@ -44,7 +45,7 @@ public class JumpPad implements Listener{
         if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")
            || event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_BLOCK")
         ){
-            if(item.equalsIgnoreCase("BLAZE_ROD")){
+            if(item.equalsIgnoreCase(Config.getRod())){
                 count = true;
             }
         }

@@ -1,5 +1,6 @@
 package net.kunmc.lab.stroke.strokeplugin.StrokeAction;
 
+import net.kunmc.lab.stroke.strokeplugin.Config;
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -14,7 +15,7 @@ public class SkyWalker implements Listener{
     int[] cautionTitle = {5,20,5};
     public void skywall(Player player,String stroke){
 
-        player.sendTitle("空中散歩術！", ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+        player.sendTitle(Config.getSkyWalkerAnnounce(), ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
 
         BukkitRunnable task = new BukkitRunnable() {
             int count = 0;
