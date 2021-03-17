@@ -3,6 +3,7 @@ actions:
     display: "SkyWalker"
     stroke: "→←→←"
     announce: "空中散歩術！"
+    floor_size: 2
   WeatherClear:
     display: "WeatherClear"
     stroke: "←↑→"
@@ -14,4 +15,11 @@ actions:
 
 rod_item: "BLAZE_ROD"
 
-magic_went_off: "魔力が暴走した。"
+magic_went_off:
+  announce: "魔力が暴走した。"
+  damage: 4
+
+stroke:
+  degree: 12
+  timer: 5
+  times: 10

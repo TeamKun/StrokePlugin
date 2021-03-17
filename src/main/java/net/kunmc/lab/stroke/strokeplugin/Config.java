@@ -10,6 +10,7 @@ public class Config {
     private static String SkyWalkerDisplay;
     private static String SkyWalkerStroke;
     private static String SkyWalkerAnnounce;
+    private static int SkyWalkerFloor;
 
     private static String WeatherClearDisplay;
     private static String WeatherClearStroke;
@@ -20,7 +21,11 @@ public class Config {
     private static String JumpPadAnnounce;
 
     private static String rod;
-    private static String magic_went_off;
+    private static String magic_went_off_announce;
+    private static int magic_went_off_damage;
+    private static int stroke_degree;
+    private static int stroke_timer;
+    private static int stroke_times;
 
     public static void loadConfig(boolean isReload) {
 
@@ -40,6 +45,7 @@ public class Config {
         SkyWalkerDisplay = config.getString("actions.SkyWalker.display");
         SkyWalkerStroke = config.getString("actions.SkyWalker.stroke");
         SkyWalkerAnnounce = config.getString("actions.SkyWalker.announce");
+        SkyWalkerFloor = config.getInt("actions.SkyWalker.floor_size");
 
         WeatherClearDisplay = config.getString("actions.WeatherClear.display");
         WeatherClearStroke = config.getString("actions.WeatherClear.stroke");
@@ -50,7 +56,11 @@ public class Config {
         JumpPadAnnounce = config.getString("actions.JumpPad.announce");
 
         rod = config.getString("rod_item");
-        magic_went_off = config.getString("magic_went_off");
+        magic_went_off_announce = config.getString("magic_went_off.announce");
+        magic_went_off_damage = config.getInt("magic_went_off.damage");
+        stroke_degree = config.getInt("stroke.degree");
+        stroke_timer = config.getInt("stroke.timer");
+        stroke_times = config.getInt("stroke.times");
 
     }
 
@@ -62,6 +72,9 @@ public class Config {
     }
     public static String getSkyWalkerAnnounce() {
         return Config.SkyWalkerAnnounce;
+    }
+    public static Integer getSkyWalkerFloor() {
+        return Config.SkyWalkerFloor;
     }
 
     public static String getWeatherClearDisplay() {
@@ -87,7 +100,19 @@ public class Config {
     public static String getRod() {
         return Config.rod;
     }
-    public static String getMagicWentOff() {
-        return Config.magic_went_off;
+    public static String getMagicWentOffAnnounce() {
+        return Config.magic_went_off_announce;
+    }
+    public static Integer getMagicWentOffDamage() {
+        return Config.magic_went_off_damage;
+    }
+    public static Integer getStrokeDegree() {
+        return Config.stroke_degree;
+    }
+    public static Integer getStrokeTimer() {
+        return Config.stroke_timer;
+    }
+    public static Integer getStrokeTimes() {
+        return Config.stroke_times;
     }
 }

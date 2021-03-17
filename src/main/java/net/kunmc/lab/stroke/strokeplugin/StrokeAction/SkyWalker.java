@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class SkyWalker implements Listener{
-    private final int r = 2;//半径
+    private final int r = Config.getSkyWalkerFloor();//半径
     int[] cautionTitle = {5,20,5};
     public void skywall(Player player,String stroke){
 

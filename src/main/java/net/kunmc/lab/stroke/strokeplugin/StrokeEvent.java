@@ -18,9 +18,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class StrokeEvent implements Listener {
     public Player player;
     public ItemStack items;
-    public final int sensi = 12;
-    public final int timer = 5;
-    //I think sensi should be set 12. if it is 15, become KUN's mouse configuration. if it is 5, nobody can control.
 
     private final int[] actionTitle = {0,100,0};
     private final int[] cautionTitle = {5,20,5};
@@ -59,12 +56,12 @@ public class StrokeEvent implements Listener {
 
         if(stats.getClick(player)&&item.equalsIgnoreCase(Config.getRod())){
             if(!stats.getTrigger(player)){
-                if(stats.getStroke(player).length()>9){
+                if(stats.getStroke(player).length()>Config.getStrokeTimes()-1){
                     player.setFireTicks(100);
                     stats.delStroke(player);
-                    player.sendTitle("",ChatColor.DARK_RED +Config.getMagicWentOff(),cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+                    player.sendTitle("",ChatColor.DARK_RED +Config.getMagicWentOffAnnounce(),cautionTitle[0],cautionTitle[1],cautionTitle[2]);
                     player.getWorld().playEffect(player.getLocation(), Effect.END_GATEWAY_SPAWN,0);
-                    player.damage(4);
+                    player.damage(Config.getMagicWentOffDamage());
                 }else{
                     getDirection(player);
                     if(StrokeDetection(stats.getStroke(player),strokes)>=1){
@@ -85,7 +82,8 @@ public class StrokeEvent implements Listener {
             stats.setAgoPitch(player, stats.getNowPitch(player));
             stats.setCount(player,true);
         }
-        if(Math.abs(stats.getSubtractPitch(player))>sensi){
+        //I think Config.getStrokeDegree() should be set 12. if it is 15, become KUN's mouse configuration. if it is 5, nobody can control.
+        if(Math.abs(stats.getSubtractPitch(player))>Config.getStrokeDegree()){
             if(Math.signum(stats.getSubtractPitch(player))==1){
                 stats.setStroke(player,"↓");
             }else{
@@ -95,7 +93,7 @@ public class StrokeEvent implements Listener {
             stats.setAgoPitch(player, stats.getNowPitch(player));
             stats.setAgoYaw(player, stats.getNowYaw(player));//この行をコメントアウトすると超ハイセンシになるが非推奨
         }
-        if(Math.abs(stats.getSubtractYaw(player))>sensi){
+        if(Math.abs(stats.getSubtractYaw(player))>Config.getStrokeDegree()){
             if(Math.signum(stats.getSubtractYaw(player))==1){
                 stats.setStroke(player,"→");
             }else{
@@ -158,7 +156,7 @@ public class StrokeEvent implements Listener {
         BukkitRunnable task = new BukkitRunnable() {
             public void run() {
                 stats.setTaskId(player, this.getTaskId());
-                if(stats.getTick(player)>timer){
+                if(stats.getTick(player)>Config.getStrokeTimer()){
                     if(stats.getWaitAction(player)){
                         StrokeAction(player,stats.getStroke(player),strokes);
                         stats.delStroke(player);
