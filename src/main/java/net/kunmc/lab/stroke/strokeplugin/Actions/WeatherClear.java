@@ -1,4 +1,4 @@
-package net.kunmc.lab.stroke.strokeplugin.StrokeAction;
+package net.kunmc.lab.stroke.strokeplugin.Actions;
 
 import net.kunmc.lab.stroke.strokeplugin.Config;
 import org.bukkit.ChatColor;

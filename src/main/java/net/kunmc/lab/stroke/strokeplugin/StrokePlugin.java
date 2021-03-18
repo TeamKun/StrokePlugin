@@ -1,7 +1,7 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
-import net.kunmc.lab.stroke.strokeplugin.StrokeAction.JumpPad;
-import net.kunmc.lab.stroke.strokeplugin.StrokeAction.SkyWalker;
+import net.kunmc.lab.stroke.strokeplugin.Actions.JumpPad;
+import net.kunmc.lab.stroke.strokeplugin.Actions.SkyWalker;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class StrokePlugin extends JavaPlugin {

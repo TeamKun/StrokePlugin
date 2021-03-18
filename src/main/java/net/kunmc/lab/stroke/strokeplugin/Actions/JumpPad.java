@@ -1,8 +1,7 @@
-package net.kunmc.lab.stroke.strokeplugin.StrokeAction;
+package net.kunmc.lab.stroke.strokeplugin.Actions;
 
 import net.kunmc.lab.stroke.strokeplugin.Config;
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -16,8 +15,8 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.util.Vector;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 public class JumpPad implements Listener{
     private Player player;

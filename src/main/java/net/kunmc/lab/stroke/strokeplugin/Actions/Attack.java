@@ -1,4 +1,4 @@
-package net.kunmc.lab.stroke.strokeplugin.StrokeAction;
+package net.kunmc.lab.stroke.strokeplugin.Actions;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

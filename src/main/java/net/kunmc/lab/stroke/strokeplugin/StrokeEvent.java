@@ -1,8 +1,8 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
-import net.kunmc.lab.stroke.strokeplugin.StrokeAction.SkyWalker;
-import net.kunmc.lab.stroke.strokeplugin.StrokeAction.WeatherClear;
-import net.kunmc.lab.stroke.strokeplugin.StrokeAction.JumpPad;
+import net.kunmc.lab.stroke.strokeplugin.Actions.SkyWalker;
+import net.kunmc.lab.stroke.strokeplugin.Actions.WeatherClear;
+import net.kunmc.lab.stroke.strokeplugin.Actions.JumpPad;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
