@@ -48,7 +48,7 @@ public class StrokeEvent implements Listener {
     public void PlayerMove(Player player) {
         items = player.getInventory().getItemInMainHand();
         String item = items.getType().toString();
-        if (!stats.getClick(player) && item.equalsIgnoreCase(Config.getRod())) return;
+        if (!(stats.getClick(player) && item.equalsIgnoreCase(Config.getRod()))) return;
 
         if (!stats.getTrigger(player)) {
             if (stats.getStroke(player).length() >= Config.getStrokeTimes()) {
