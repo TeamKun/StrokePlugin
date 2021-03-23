@@ -59,11 +59,8 @@ public class StrokeEvent implements Listener {
                 player.damage(Config.getMagicWentOffDamage());
             } else {
                 getDirection(player);
-                Bukkit.getLogger().info(stats.getStroke(player));
-                Bukkit.getLogger().info(((Boolean) api.isExist(stats.getStroke(player))).toString());
                 String stroke = stats.getStroke(player);
                 if (StrokeDetection(stroke)) {
-                    player.sendTitle(api.getAction(stroke).getAnnounce(), ChatColor.AQUA + stroke, 0, 20, 0);
                     player.sendTitle(ChatColor.DARK_AQUA + stroke, api.getAction(stroke).getName(), cautionTitle[0], 1000, cautionTitle[2]);
                     stats.setTrigger(player, true);
                 }
@@ -105,7 +102,10 @@ public class StrokeEvent implements Listener {
 
     //↑↓→←
     public void StrokeAction(Player player, String stroke) {
-        if (api.isExist(stroke)) api.getAction(stroke).run(player);
+        if (api.isExist(stroke)) {
+            player.sendTitle(api.getAction(stroke).getAnnounce(), ChatColor.AQUA + stroke, 5, 20, 5);
+            api.getAction(stroke).run(player);
+        }
     }
 
     public boolean StrokeDetection(String stroke) {
@@ -161,7 +161,7 @@ public class StrokeEvent implements Listener {
                     this.cancel();
                 }
                 stats.setTick(player);
-                Bukkit.getLogger().info(this.getTaskId() + " : " + stats.getTick(player));
+                //Bukkit.getLogger().info(this.getTaskId() + " : " + stats.getTick(player));
             }
         };
         stats.setClick(player, false);//クリック判定の解除
