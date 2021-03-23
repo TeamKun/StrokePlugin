@@ -1,6 +1,7 @@
 package net.kunmc.lab.stroke.strokeplugin.Actions;
 
 import net.kunmc.lab.stroke.strokeplugin.Config;
+import net.kunmc.lab.stroke.strokeplugin.StrokeAction;
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -18,15 +19,45 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-public class JumpPad implements Listener{
+public class JumpPad implements Listener, StrokeAction {
     private Player player;
     private boolean count = false;
     private final int[] cautionTitle = {5,20,5};
+    private String name;
+    private String stroke;
+    private String announce;
 
-    public void DropPad(Player player,String stroke){
+
+    public JumpPad() {
+
+    }
+
+   public JumpPad(String name, String stroke, String announce) {
+        this.name = name;
+        this.stroke = stroke;
+        this.announce = announce;
+    }
+
+    @Override
+    public void run(Player player, String stroke) {
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
         player.sendTitle(Config.getJumpPadAnnounce(), ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getStroke() {
+        return stroke;
+    }
+
+    @Override
+    public String getAnnounce() {
+        return announce;
     }
 
     @EventHandler
@@ -85,5 +116,6 @@ public class JumpPad implements Listener{
 
         }
     }
+
 
 }

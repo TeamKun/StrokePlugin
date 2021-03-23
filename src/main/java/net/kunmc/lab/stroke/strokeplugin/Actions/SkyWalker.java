@@ -1,6 +1,7 @@
 package net.kunmc.lab.stroke.strokeplugin.Actions;
 
 import net.kunmc.lab.stroke.strokeplugin.Config;
+import net.kunmc.lab.stroke.strokeplugin.StrokeAction;
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,11 +11,25 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SkyWalker implements Listener{
+public class SkyWalker implements Listener, StrokeAction {
     private final int r = Config.getSkyWalkerFloor();//半径
     int[] cautionTitle = {5,20,5};
-    public void skywall(Player player,String stroke){
+    private String name;
+    private String stroke;
+    private String announce;
 
+    public SkyWalker() {
+
+    }
+
+    public SkyWalker(String name, String stroke, String announce) {
+        this.name = name;
+        this.stroke = stroke;
+        this.announce = announce;
+    }
+
+    @Override
+    public void run(Player player, String stroke) {
         player.sendTitle(Config.getSkyWalkerAnnounce(), ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
 
         BukkitRunnable task = new BukkitRunnable() {
@@ -47,5 +62,20 @@ public class SkyWalker implements Listener{
             }
         };
         task.runTaskTimer(StrokePlugin.getPlugin(), 0L,1L);
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getStroke() {
+        return stroke;
+    }
+
+    @Override
+    public String getAnnounce() {
+        return announce;
     }
 }
