@@ -20,4 +20,6 @@ public class StrokePluginAPI {
     public boolean isExist(String stroke) {
         return strokes.containsKey(stroke);
     }
+
+    
 }

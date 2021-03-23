@@ -3,7 +3,6 @@ package net.kunmc.lab.stroke.strokeplugin.Actions;
 import net.kunmc.lab.stroke.strokeplugin.Config;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction;
 import net.kunmc.lab.stroke.strokeplugin.StrokePlugin;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -40,10 +39,9 @@ public class JumpPad implements Listener, StrokeAction {
     }
 
     @Override
-    public void run(Player player, String stroke) {
+    public void run(Player player) {
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
-        player.sendTitle(Config.getJumpPadAnnounce(), ChatColor.AQUA + stroke, cautionTitle[0], cautionTitle[1], cautionTitle[2]);
     }
 
     @Override

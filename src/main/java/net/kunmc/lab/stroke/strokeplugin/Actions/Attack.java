@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 public class Attack implements StrokeAction {
     @Override
-    public void run(Player player, String stroke) {
+    public void run(Player player) {
         player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SMALL_FIREBALL);
     }
 

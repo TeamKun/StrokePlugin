@@ -1,8 +1,6 @@
 package net.kunmc.lab.stroke.strokeplugin.Actions;
 
-import net.kunmc.lab.stroke.strokeplugin.Config;
 import net.kunmc.lab.stroke.strokeplugin.StrokeAction;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class WeatherClear implements StrokeAction {
@@ -23,9 +21,8 @@ public class WeatherClear implements StrokeAction {
     }
 
     @Override
-    public void run(Player player, String stroke) {
+    public void run(Player player) {
         player.getWorld().setStorm(false);
-        player.sendTitle(Config.getWeatherClearAnnounce(), ChatColor.AQUA + stroke, 0, 20, 0);
     }
 
     @Override

@@ -61,8 +61,10 @@ public class StrokeEvent implements Listener {
                 getDirection(player);
                 Bukkit.getLogger().info(stats.getStroke(player));
                 Bukkit.getLogger().info(((Boolean) api.isExist(stats.getStroke(player))).toString());
-                if (StrokeDetection(stats.getStroke(player))) {
-                    player.sendTitle(ChatColor.DARK_AQUA + stats.getStroke(player), api.getAction(stats.getStroke(player)).getName(), cautionTitle[0], 1000, cautionTitle[2]);
+                String stroke = stats.getStroke(player);
+                if (StrokeDetection(stroke)) {
+                    player.sendTitle(api.getAction(stroke).getAnnounce(), ChatColor.AQUA + stroke, 0, 20, 0);
+                    player.sendTitle(ChatColor.DARK_AQUA + stroke, api.getAction(stroke).getName(), cautionTitle[0], 1000, cautionTitle[2]);
                     stats.setTrigger(player, true);
                 }
             }
@@ -103,7 +105,7 @@ public class StrokeEvent implements Listener {
 
     //↑↓→←
     public void StrokeAction(Player player, String stroke) {
-        if (api.isExist(stroke)) api.getAction(stroke).run(player, stroke);
+        if (api.isExist(stroke)) api.getAction(stroke).run(player);
     }
 
     public boolean StrokeDetection(String stroke) {
