@@ -7,6 +7,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +18,7 @@ public class StrokeEvent implements Listener {
     public ItemStack items;
     private final int[] actionTitle = {0, 100, 0};
     private final int[] cautionTitle = {5, 20, 5};
-    private StrokePluginAPI api;
+    private final StrokePluginAPI api;
     PlayerStats stats = new PlayerStats();
 
     StrokeEvent() {
@@ -35,8 +36,8 @@ public class StrokeEvent implements Listener {
     public void onPlayerClick(PlayerInteractEvent event) {
         player = event.getPlayer();
 
-        if (event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")
-                || event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_BLOCK")
+        if (event.getAction() == Action.RIGHT_CLICK_AIR
+                || event.getAction() == Action.RIGHT_CLICK_BLOCK
         ) {
             ScheduleCheck(player);
             stats.setClick(player, true);
@@ -47,7 +48,6 @@ public class StrokeEvent implements Listener {
     public void PlayerMove(Player player) {
         items = player.getInventory().getItemInMainHand();
         String item = items.getType().toString();
-
         if (!stats.getClick(player) && item.equalsIgnoreCase(Config.getRod())) return;
 
         if (!stats.getTrigger(player)) {
