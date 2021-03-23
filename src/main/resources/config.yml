@@ -21,5 +21,5 @@ magic_went_off:
 
 stroke:
   degree: 12
-  timer: 5
-  times: 10
+  timer: 5 #右クリックホールドの判定が安定しない場合変更する
+  maxStroke: 10

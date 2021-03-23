@@ -60,19 +60,22 @@ public class Config {
         magic_went_off_damage = config.getInt("magic_went_off.damage");
         stroke_degree = config.getInt("stroke.degree");
         stroke_timer = config.getInt("stroke.timer");
-        stroke_times = config.getInt("stroke.times");
+        stroke_times = config.getInt("stroke.maxStroke");
 
     }
 
     public static String getSkyWalkerDisplay() {
         return Config.SkyWalkerDisplay;
     }
+
     public static String getSkyWalkerStroke() {
         return Config.SkyWalkerStroke;
     }
+
     public static String getSkyWalkerAnnounce() {
         return Config.SkyWalkerAnnounce;
     }
+
     public static Integer getSkyWalkerFloor() {
         return Config.SkyWalkerFloor;
     }
@@ -80,9 +83,11 @@ public class Config {
     public static String getWeatherClearDisplay() {
         return Config.WeatherClearDisplay;
     }
+
     public static String getWeatherClearStroke() {
         return Config.WeatherClearStroke;
     }
+
     public static String getWeatherClearAnnounce() {
         return Config.WeatherClearAnnounce;
     }
@@ -90,9 +95,11 @@ public class Config {
     public static String getJumpPadDisplay() {
         return Config.JumpPadDisplay;
     }
+
     public static String getJumpPadStroke() {
         return Config.JumpPadStroke;
     }
+
     public static String getJumpPadAnnounce() {
         return Config.JumpPadAnnounce;
     }
@@ -100,18 +107,23 @@ public class Config {
     public static String getRod() {
         return Config.rod;
     }
+
     public static String getMagicWentOffAnnounce() {
         return Config.magic_went_off_announce;
     }
+
     public static Integer getMagicWentOffDamage() {
         return Config.magic_went_off_damage;
     }
+
     public static Integer getStrokeDegree() {
         return Config.stroke_degree;
     }
+
     public static Integer getStrokeTimer() {
         return Config.stroke_timer;
     }
+
     public static Integer getStrokeTimes() {
         return Config.stroke_times;
     }

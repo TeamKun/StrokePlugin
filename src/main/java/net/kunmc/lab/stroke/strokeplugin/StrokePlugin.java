@@ -10,6 +10,11 @@ public final class StrokePlugin extends JavaPlugin {
     private static StrokePlugin plugin;
     private static StrokePluginAPI api;
 
+
+    public static StrokePlugin getPlugin() {
+        return plugin;
+    }
+
     public static StrokePluginAPI getApi() {
         return api;
     }
@@ -17,7 +22,6 @@ public final class StrokePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        saveDefaultConfig();
         Config.loadConfig(false);
         api = new StrokePluginAPI();
         api.registerAction(new SkyWalker(Config.getSkyWalkerDisplay(), Config.getSkyWalkerStroke(), Config.getSkyWalkerAnnounce(), ""));
@@ -36,10 +40,4 @@ public final class StrokePlugin extends JavaPlugin {
     public void onDisable() {
         getLogger().info("モーションプラグインが無効になりました");
     }
-
-    public static StrokePlugin getPlugin() {
-        return plugin;
-    }
-
-
 }
