@@ -17,16 +17,18 @@ public final class StrokePlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        saveDefaultConfig();
+        Config.loadConfig(false);
+        api = new StrokePluginAPI();
+        api.registerAction(new SkyWalker(Config.getSkyWalkerDisplay(), Config.getSkyWalkerStroke(), Config.getSkyWalkerAnnounce(), ""));
+        api.registerAction(new JumpPad(Config.getJumpPadDisplay(), Config.getJumpPadStroke(), Config.getJumpPadAnnounce(), ""));
+        api.registerAction(new WeatherClear(Config.getWeatherClearDisplay(), Config.getWeatherClearStroke(), Config.getWeatherClearAnnounce(), ""));
+
         getServer().getPluginManager().registerEvents(new StrokeEvent(), this);
         getServer().getPluginManager().registerEvents(new JumpPad(), this);
         getServer().getPluginManager().registerEvents(new SkyWalker(), this);
         getCommand("Stroke").setExecutor(new MotionCommandExecutor(this));
         getCommand("ReloadConfig").setExecutor(new MotionCommandExecutor(this));
-        Config.loadConfig(false);
-        api = new StrokePluginAPI();
-        api.registerAction(new SkyWalker(Config.getSkyWalkerDisplay(),Config.getSkyWalkerStroke(),Config.getSkyWalkerAnnounce()));
-        api.registerAction(new JumpPad(Config.getJumpPadDisplay(),Config.getJumpPadStroke(),Config.getJumpPadAnnounce()));
-        api.registerAction(new WeatherClear(Config.getWeatherClearDisplay(),Config.getWeatherClearStroke(),Config.getWeatherClearAnnounce()));
         getLogger().info("モーションプラグインが有効になりました");
     }
 
@@ -35,7 +37,7 @@ public final class StrokePlugin extends JavaPlugin {
         getLogger().info("モーションプラグインが無効になりました");
     }
 
-    public static StrokePlugin getPlugin(){
+    public static StrokePlugin getPlugin() {
         return plugin;
     }
 

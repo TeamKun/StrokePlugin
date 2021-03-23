@@ -51,7 +51,7 @@ public class StrokeEvent implements Listener {
         if (!stats.getClick(player) && item.equalsIgnoreCase(Config.getRod())) return;
 
         if (!stats.getTrigger(player)) {
-            if (stats.getStroke(player).length() > Config.getStrokeTimes() - 1) {
+            if (stats.getStroke(player).length() >= Config.getStrokeTimes()) {
                 player.setFireTicks(100);
                 stats.delStroke(player);
                 player.sendTitle("", ChatColor.DARK_RED + Config.getMagicWentOffAnnounce(), cautionTitle[0], cautionTitle[1], cautionTitle[2]);
@@ -59,7 +59,9 @@ public class StrokeEvent implements Listener {
                 player.damage(Config.getMagicWentOffDamage());
             } else {
                 getDirection(player);
-                if (api.isExist(stats.getStroke(player))) {
+                Bukkit.getLogger().info(stats.getStroke(player));
+                Bukkit.getLogger().info(((Boolean) api.isExist(stats.getStroke(player))).toString());
+                if (StrokeDetection(stats.getStroke(player))) {
                     player.sendTitle(ChatColor.DARK_AQUA + stats.getStroke(player), api.getAction(stats.getStroke(player)).getName(), cautionTitle[0], 1000, cautionTitle[2]);
                     stats.setTrigger(player, true);
                 }
@@ -104,15 +106,14 @@ public class StrokeEvent implements Listener {
         if (api.isExist(stroke)) api.getAction(stroke).run(player, stroke);
     }
 
-    public Integer StrokeDetection(String stroke, String[][] strokes) {
-        for (int i = 1; i < strokes.length; i++) {
-            if (stroke.equalsIgnoreCase(strokes[i][0])) {
-                stats.setWaitAction(player, true);
-                return i;
-            }
+    public boolean StrokeDetection(String stroke) {
+        if (api.isExist(stroke)) {
+            stats.setWaitAction(player, true);
+            return true;
+        } else {
+            stats.setWaitAction(player, false);
+            return false;
         }
-        stats.setWaitAction(player, false);
-        return 0;
     }
 
     public void ActionResetJudge(Player player) {

@@ -22,27 +22,28 @@ import org.bukkit.util.Vector;
 public class JumpPad implements Listener, StrokeAction {
     private Player player;
     private boolean count = false;
-    private final int[] cautionTitle = {5,20,5};
+    private final int[] cautionTitle = {5, 20, 5};
     private String name;
     private String stroke;
     private String announce;
-
+    private String description;
 
     public JumpPad() {
 
     }
 
-   public JumpPad(String name, String stroke, String announce) {
+    public JumpPad(String name, String stroke, String announce, String description) {
         this.name = name;
         this.stroke = stroke;
         this.announce = announce;
+        this.description = description;
     }
 
     @Override
     public void run(Player player, String stroke) {
         Entity ball = player.getWorld().spawnEntity(player.getEyeLocation(), EntityType.SNOWBALL);
         ball.setVelocity(player.getLocation().getDirection());
-        player.sendTitle(Config.getJumpPadAnnounce(), ChatColor.AQUA +stroke,cautionTitle[0],cautionTitle[1],cautionTitle[2]);
+        player.sendTitle(Config.getJumpPadAnnounce(), ChatColor.AQUA + stroke, cautionTitle[0], cautionTitle[1], cautionTitle[2]);
     }
 
     @Override
@@ -60,32 +61,37 @@ public class JumpPad implements Listener, StrokeAction {
         return announce;
     }
 
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
     @EventHandler
-    public void onEntitySpawn(EntitySpawnEvent event){
-        if(event.getEntity().getType().toString().equalsIgnoreCase(Config.getRod())){
+    public void onEntitySpawn(EntitySpawnEvent event) {
+        if (event.getEntity().getType().toString().equalsIgnoreCase(Config.getRod())) {
             event.getEntity().remove();
         }
     }
 
     @EventHandler
-    public void onPlayerClick(PlayerInteractEvent event){
+    public void onPlayerClick(PlayerInteractEvent event) {
         player = event.getPlayer();
         String item = player.getInventory().getItemInMainHand().getType().toString();
 
-        if(event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")
-           || event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_BLOCK")
-        ){
-            if(item.equalsIgnoreCase(Config.getRod())){
+        if (event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_AIR")
+                || event.getAction().toString().equalsIgnoreCase("RIGHT_CLICK_BLOCK")
+        ) {
+            if (item.equalsIgnoreCase(Config.getRod())) {
                 count = true;
             }
         }
     }
 
     @EventHandler
-    public void BallBreak(ProjectileHitEvent event){
+    public void BallBreak(ProjectileHitEvent event) {
         Block block;
 
-        if(event.getEntity().getType().toString().equalsIgnoreCase("SNOWBALL")&&count){
+        if (event.getEntity().getType().toString().equalsIgnoreCase("SNOWBALL") && count) {
             block = event.getEntity().getLocation().getBlock();
             block.setType(Material.PRISMARINE_SLAB);
 
@@ -96,22 +102,20 @@ public class JumpPad implements Listener, StrokeAction {
                     return;
                 }
             };
-            task.runTaskTimer(StrokePlugin.getPlugin(), 100L,0L);
+            task.runTaskTimer(StrokePlugin.getPlugin(), 100L, 0L);
         }
         count = false;
     }
 
     @EventHandler
-    public void jumppad(PlayerMoveEvent event){
-        if((event.getPlayer()).isOnGround())
-        {
-            Location loc=event.getTo();
+    public void jumppad(PlayerMoveEvent event) {
+        if ((event.getPlayer()).isOnGround()) {
+            Location loc = event.getTo();
             Location p = loc.clone();
-            p.add(0,-0.1,0);
+            p.add(0, -0.1, 0);
 
-            if(loc.getBlock().getType().equals(Material.PRISMARINE_SLAB))
-            {
-                (event.getPlayer()).setVelocity(new Vector(0,1.2,0));
+            if (loc.getBlock().getType().equals(Material.PRISMARINE_SLAB)) {
+                (event.getPlayer()).setVelocity(new Vector(0, 1.2, 0));
             }
 
         }

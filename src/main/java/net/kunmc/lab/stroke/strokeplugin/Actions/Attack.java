@@ -24,4 +24,9 @@ public class Attack implements StrokeAction {
     public String getAnnounce() {
         return "Fire!";
     }
+
+    @Override
+    public String getDescription() {
+        return "";
+    }
 }
