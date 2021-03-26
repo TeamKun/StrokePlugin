@@ -10,7 +10,6 @@ public final class StrokePlugin extends JavaPlugin {
     private static StrokePlugin plugin;
     private static StrokePluginAPI api;
 
-
     public static StrokePlugin getPlugin() {
         return plugin;
     }
