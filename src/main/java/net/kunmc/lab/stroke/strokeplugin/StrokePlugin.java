@@ -1,5 +1,6 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
+import net.kunmc.lab.stroke.strokeplugin.Actions.Attack;
 import net.kunmc.lab.stroke.strokeplugin.Actions.JumpPad;
 import net.kunmc.lab.stroke.strokeplugin.Actions.SkyWalker;
 import net.kunmc.lab.stroke.strokeplugin.Actions.WeatherClear;
@@ -9,9 +10,6 @@ public final class StrokePlugin extends JavaPlugin {
 
     private static StrokePlugin plugin;
     private static StrokePluginAPI api;
-
-    private static StrokePluginAPI api;
-
 
     public static StrokePlugin getPlugin() {
         return plugin;
@@ -26,15 +24,20 @@ public final class StrokePlugin extends JavaPlugin {
         plugin = this;
         Config.loadConfig(false);
         api = new StrokePluginAPI();
-        api.registerAction(new SkyWalker(Config.getSkyWalkerDisplay(), Config.getSkyWalkerStroke(), Config.getSkyWalkerAnnounce(), ""));
-        api.registerAction(new JumpPad(Config.getJumpPadDisplay(), Config.getJumpPadStroke(), Config.getJumpPadAnnounce(), ""));
-        api.registerAction(new WeatherClear(Config.getWeatherClearDisplay(), Config.getWeatherClearStroke(), Config.getWeatherClearAnnounce(), ""));
+        //api.registerAction(new Attack(Config.getAttack("display"), Config.getAttack("stroke"), Config.getAttack("announce"), Config.getAttack("explain")));
+        api.registerAction(new SkyWalker(Config.getSkyWalker("display"), Config.getSkyWalker("stroke"), Config.getSkyWalker("announce"), Config.getSkyWalker("explain")));
+        api.registerAction(new JumpPad(Config.getJumpPad("display"), Config.getJumpPad("stroke"), Config.getJumpPad("announce"), Config.getJumpPad("explain")));
+        api.registerAction(new WeatherClear(Config.getWeatherClear("display"), Config.getWeatherClear("stroke"), Config.getWeatherClear("announce"), Config.getWeatherClear("explain")));
 
         getServer().getPluginManager().registerEvents(new StrokeEvent(), this);
         getServer().getPluginManager().registerEvents(new JumpPad(), this);
         getServer().getPluginManager().registerEvents(new SkyWalker(), this);
-        getCommand("Stroke").setExecutor(new MotionCommandExecutor(this));
-        getCommand("ReloadConfig").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke@Title").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke@ReloadConfig").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke@help").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke@list").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke@description").setExecutor(new MotionCommandExecutor(this));
+        getCommand("Stroke@descriptionFormal").setExecutor(new MotionCommandExecutor(this));
         getLogger().info("モーションプラグインが有効になりました");
     }
 

@@ -21,7 +21,6 @@ import org.bukkit.util.Vector;
 public class JumpPad implements Listener, StrokeAction {
     private Player player;
     private boolean count = false;
-    private final int[] cautionTitle = {5, 20, 5};
     private String name;
     private String stroke;
     private String announce;

@@ -1,19 +1,45 @@
+System:
+  Help: " Stroke : タイトル表示\n
+         Stroke@help : こちら\n
+         Stroke@stroke : ストロークを確認する。\n
+         Stroke@explain : 参加税向け説明\n
+         Stroke@explainFormal : プラグインの公式説明\n"
+  Explain: " ブレイズロッドを持って右クリック押し続ける\n
+            視点を動かす。んで離す。\n
+            下のアクションとあってればなんか起きる。"
+  Explain-Formal: " ブレイズロッドをもって右クリックホールド。\n
+                   視点を上下左右に振る。(12度ごとに1回（仮）としてある。)\n
+                   Strokeが存在するアクションと一致した場合にアクションを待機する。\n
+                   右クリックを離したときに発動する。\n
+                   もしStroke ≥ 10になると魔力の暴走が起きる。（プレイヤー発火＆ダメージ）\n
+                   ストロークキャンセルは手持ちのアイテムを変える。\n
+                   ストロークがすぐにキャンセルされて発動できないときは充分に時間を空けてからストロークを開始してください。（原因究明中）"
+
 actions:
   SkyWalker:
     display: "SkyWalker"
     stroke: "→←→←"
     announce: "空中散歩術！"
+    explain: "[SkyWalker] →←→← : 歩いたところが地面なのです。"
     floor_size: 2
   WeatherClear:
     display: "WeatherClear"
     stroke: "←↑→"
     announce: "あ～した天気になれ!"
+    explain: "[WeatherClear] ←↑→ : 晴れるのです。"
   JumpPad:
     display: "JumpPad"
     stroke: "↓↑"
     announce: "ジャンプパッド展開!"
+    explain: "[JumpPad] ↓↑ : オク〇ンのアイテムなのです。"
+  Attack:
+    display: "Attack"
+    stroke: "↑↓↑↓"
+    announce: "くらえ!"
+    explain: "[Attack] ↑↓↑↓ : 正義の鉄槌をくらわすのです。"
 
 rod_item: "BLAZE_ROD"
+no_select: "*-ERROR-* Argument is missing or empty!!"
 
 magic_went_off:
   announce: "魔力が暴走した。"
@@ -21,5 +47,5 @@ magic_went_off:
 
 stroke:
   degree: 12
-  timer: 5 #右クリックホールドの判定が安定しない場合変更する
+  timer: 6 #右クリックホールドの判定が安定しない場合変更する
   maxStroke: 10

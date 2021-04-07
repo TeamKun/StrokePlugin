@@ -5,7 +5,19 @@ api-version: 1.15
 authors: [CrewL2020]
 
 commands:
-  Stroke:
-    description: strokeplugin commands
-  ReloadConfig:
-    description: strokeplugin commands
+  Stroke@Title:
+    description: show title
+  Stroke@ReloadConfig:
+    description: reload config
+  Stroke@help:
+    description: show help
+  Stroke@list:
+    description: show command list
+  Stroke@description:
+    description: show explains
+  Stroke@descriptionFormal:
+    description: show explains detail
+
+permissions:
+  stroke.permission:
+    default: op

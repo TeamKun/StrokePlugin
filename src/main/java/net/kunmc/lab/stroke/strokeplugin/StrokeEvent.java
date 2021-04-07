@@ -3,7 +3,6 @@ package net.kunmc.lab.stroke.strokeplugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -57,6 +56,7 @@ public class StrokeEvent implements Listener {
                 player.sendTitle("", ChatColor.DARK_RED + Config.getMagicWentOffAnnounce(), cautionTitle[0], cautionTitle[1], cautionTitle[2]);
                 player.getWorld().playEffect(player.getLocation(), Effect.END_GATEWAY_SPAWN, 0);
                 player.damage(Config.getMagicWentOffDamage());
+                player.getWorld().createExplosion(player.getLocation().subtract(0, -1, 0), 0);
             } else {
                 getDirection(player);
                 String stroke = stats.getStroke(player);
@@ -102,14 +102,14 @@ public class StrokeEvent implements Listener {
 
     //↑↓→←
     public void StrokeAction(Player player, String stroke) {
-        if (api.isExist(stroke)) {
+        if (api.isExistKey(stroke)) {
             player.sendTitle(api.getAction(stroke).getAnnounce(), ChatColor.AQUA + stroke, 5, 20, 5);
             api.getAction(stroke).run(player);
         }
     }
 
     public boolean StrokeDetection(String stroke) {
-        if (api.isExist(stroke)) {
+        if (api.isExistKey(stroke)) {
             stats.setWaitAction(player, true);
             return true;
         } else {
@@ -126,9 +126,6 @@ public class StrokeEvent implements Listener {
             stats.resetTick(player);
             stats.setSignal(player, false);
             stats.setTrigger(player, false);
-            player.getWorld().playSound(player.getLocation(), Sound.ENTITY_VEX_DEATH, 1, 7);
-            player.getWorld().createExplosion(player.getLocation().subtract(0, -1, 0), 0);
-
         }
         stats.setWaitAction(player, false);
     }
@@ -161,7 +158,7 @@ public class StrokeEvent implements Listener {
                     this.cancel();
                 }
                 stats.setTick(player);
-                //Bukkit.getLogger().info(this.getTaskId() + " : " + stats.getTick(player));
+                Bukkit.getLogger().info(this.getTaskId() + " : " + stats.getTick(player));
             }
         };
         stats.setClick(player, false);//クリック判定の解除

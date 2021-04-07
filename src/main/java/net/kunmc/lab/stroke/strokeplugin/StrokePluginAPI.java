@@ -1,10 +1,13 @@
 package net.kunmc.lab.stroke.strokeplugin;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class StrokePluginAPI {
-    private final Map<String, StrokeAction> strokes = new HashMap<>();
+    private static final Map<String, StrokeAction> strokes = new HashMap<>();
 
     //Strokeが競合した場合はfalseを返却する
     public boolean registerAction(StrokeAction action) {
@@ -17,9 +20,13 @@ public class StrokePluginAPI {
         return strokes.get(stroke);
     }
 
-    public boolean isExist(String stroke) {
+    public boolean isExistKey(String stroke) {
         return strokes.containsKey(stroke);
     }
 
-    
+    public static void getCommandList(Player player){
+        for(String key : strokes.keySet()){
+            player.sendMessage(strokes.get(key).getDescription());
+        }
+    }
 }
